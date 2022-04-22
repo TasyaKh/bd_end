@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/shape_play"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="2"
+        android:gravity="right"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="10dp">
+
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+
+            android:backgroundTint="@color/edit_fragment_100"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:fontFamily="sans-serif"
+            android:maxWidth="260dp"
+            android:maxHeight="150dp"
+            android:maxLength="@integer/max_length_description"
+            android:scrollbarSize="6dp"
+            android:scrollbars="vertical"
+            android:text="@string/description"
+            android:textSize="10pt"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@null"
+            />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/words"
+            android:textSize="10pt"
+            app:layout_constraintEnd_toStartOf="@+id/count_words"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/edit_fragment_100"
+            android:src="@drawable/ic_refresh"
+            app:layout_constraintEnd_toStartOf="@+id/see_statistic"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/see_statistic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/edit_fragment_100"
+            android:src="@drawable/ic_wysiwyg"
+            android:tooltipText="@string/correct_words"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/count_words"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="10dp"
+            android:text="0"
+            android:textSize="10pt"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="50dp"
+        android:layout_weight="4"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top">
+
+        <HorizontalScrollView
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_columnSpan="2"
+            android:background="@color/divider"
+            android:layout_gravity="center"
+            >
+            <TextView
+                android:id="@+id/word"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+
+                android:fontFamily="sans-serif-black"
+
+                android:text="@string/word"
+                android:textColor="@color/edit_fragment_100"
+                android:textSize="14pt"
+                android:scrollbars="horizontal" />
+        </HorizontalScrollView>
+
+
+        <EditText
+            android:id="@+id/translate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/edit_fragment_100"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:hint="@string/translate"
+
+            android:maxWidth="200dp"
+            android:maxHeight="100dp"
+            android:minWidth="150dp"
+
+            android:maxLength="@integer/max_length_words"
+            android:textSize="14pt"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <Button
+            android:id="@+id/check"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/edit_fragment_100"
+            android:text="@string/check"
+            app:icon="@drawable/ic_chevron" />
+
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

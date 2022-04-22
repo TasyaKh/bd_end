@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">Owl</string>
+    <string name="english_word">English</string>
+    <string name="ru_word">Russia</string>
+    <string name="save">save</string>
+    <string name="description">Description</string>
+    <string name="add">add</string>
+
+    <string name="home">Home</string>
+    <string name="reference">Info</string>
+
+    <!--In info Fragment Description of program-->
+    <string name="info"><![CDATA[
+     <font color="#BA55D3" align="center"><h2><b>Справка</b></h2></font><br/>
+
+      <hr>
+       <font color="#BA55D3"> <h4> Home </h4> </font>
+
+       <ul>
+        <li> Чтобы удалить элемент сделайте долгое нажатие по элементу </li> <br/>
+        <li> Чтобы посмотреть подробную информацию об элементе, нажмите на него </li> <br/>
+        <li> Для добавление нового элемента нажмите кнопку "ADD" </li> <br/>
+        <li> Чтобы изменить параметры сортировки, воспользуйтесь правым верхним меню </li> <br/>
+        <li> Чтобы найти слово нажмите на значек поиска в бар-меню </li> <br/>
+         <li> Если вы хотите пометить слово как приоритетное, нажмите на цифру слева от слова </li> <br/>
+       </ul>
+        <hr>
+
+       <font color="#BA55D3"> <h4> Play </h4> </font>
+
+        <ul>
+         <li> В меню дополнительных опций вправа сверху можно выбрать нужные слова для игры </li> <br/>
+         <li> В случае окончания игры список слов можно перезаполнить </li> <br/>
+         <li> Чтобы посмотреть статистику (возле кнопки перезагрузки), необходимо чтобы хотя бы одно слово было полностью завершено </li> <br/>
+        </ul>
+       <h4> Примечание: </h4>
+       Действия в этом окне никак не влияют на состояние словаря <br/>
+       <hr>
+
+       <h4> Ссылки </h4>
+       <a href = https://translate.google.ru>Google переводчик</a> <br/> <br/>
+       <a href = https://translate.yandex.ru>Yandex переводчик</a> <br/> <br/>
+       <a href = https://dictionary.cambridge.org/ru>Cambridge dictionary</a>
+
+        <h4> Об авторе </h4>
+        <b>ФИ:</b> Хребтова Таисия <br/>
+        <b> Группа:</b> ИСТБ-20-4 <br/>
+        <b> Дата начала разработки приложения:</b> 4.03.2022 <br/>
+
+        ]]>
+
+    </string>
+    <string name="owl">Owl</string>
+    <string name="check">Check</string>
+    <string name="word">word</string>
+    <string name="priority">priority</string>
+    <string name="all">all</string>
+    <string name="words">Words: </string>
+    <string name="en">en</string>
+    <string name="ru">ru</string>
+    <string name="none">none</string>
+
+    <string name="correct_words">correct words</string>
+
+    <!--Alert Dialog for Fragment Play-->
+    <string name="words_in_play">Game</string>
+    <string name="words_correct">Correct</string>
+    <string name="translate">translate</string>
+</resources>

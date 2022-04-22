@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.20104166666666667" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.125" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_baseline.xml" value="0.2234375" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_brush.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_delete.xml" value="0.20104166666666667" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_done.xml" value="0.2164102564102564" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_enterexit.xml" value="0.2164102564102564" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_home.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_icon_owl.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_info.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_launcher_background.xml" value="0.125" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_navigator.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_owl.xml" value="0.2234375" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_play.xml" value="0.22205128205128205" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_refresh.xml" value="0.225" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_search.xml" value="0.225" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_volume_up.xml" value="0.2388888888888889" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/ic_wysiwyg.xml" value="0.2324074074074074" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/drawable/svg.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/activity_add.xml" value="0.4" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/activity_main.xml" value="0.2418478260869565" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/activity_navigator.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/add.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/add_activity.xml" value="0.234375" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/app_bar_main.xml" value="0.176" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/bottom_sheet.xml" value="0.15052083333333333" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/content_main.xml" value="0.1094224924012158" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/delete.xml" value="0.15052083333333333" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/design_list_view.xml" value="0.25" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/edit.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/for_list_view.xml" value="0.1625" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/fragment_alert_dialog.xml" value="0.176" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/fragment_info.xml" value="0.2359375" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/fragment_play.xml" value="0.2" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/layout.xml" value="0.13858695652173914" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/layout2.xml" value="0.10190217391304347" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/layout3.xml" value="0.1286231884057971" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/layout_add_new.xml" value="0.1671875" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/list.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/list_design.xml" value="0.264" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/listview.xml" value="0.14175724637681159" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/main.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/main_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/menu_actions.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/layout/nav_header_main.xml" value="0.4" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/menu/activity_main_drawer.xml" value="0.22153846153846155" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/menu/main.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/menu/menu_act.xml" value="0.1" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/menu/menu_fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/menu/menu_fragment_play.xml" value="0.16614583333333333" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20555555555555555" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/bd/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_end/app/src/main/res/drawable/border_around_edit.xml" value="0.1" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_end/app/src/main/res/drawable/shape_play.xml" value="0.1" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_end/app/src/main/res/layout/activity_main.xml" value="0.16979166666666667" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_end/app/src/main/res/layout/fragment_home.xml" value="0.11195542046605876" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_end/app/src/main/res/layout/fragment_play.xml" value="0.176" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_end/app/src/main/res/layout/list_design.xml" value="0.11195542046605876" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_my/app/src/main/res/drawable/border_around_edit.xml" value="0.20104166666666667" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_my/app/src/main/res/layout/app_bar_main.xml" value="0.1322463768115942" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_my/app/src/main/res/layout/fragment_alert_dialog.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_my/app/src/main/res/layout/fragment_home.xml" value="0.1585144927536232" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_my/app/src/main/res/layout/fragment_play.xml" value="0.1" />
+        <entry key="..\:/Users/1/Desktop/MyFiles/Study_2_Course/2 Semester/Java/Cursovaya/bd_my/app/src/main/res/layout/list_design.xml" value="0.1585144927536232" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

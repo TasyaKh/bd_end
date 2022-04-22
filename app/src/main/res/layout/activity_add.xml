@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/english_word"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/english_edit"
+        android:maxLength="@integer/max_length_words"
+        android:backgroundTint="@color/edit_fragment_100"
+        android:hint="@string/en"
+        android:textCursorDrawable="@null"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ru_word" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/russia_edit"
+        android:maxLength="@integer/max_length_words"
+        android:backgroundTint="@color/edit_fragment_100"
+        android:hint="@string/ru"
+        android:textCursorDrawable="@null"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/save"
+        android:text="@string/save"
+        android:backgroundTint="@color/edit_fragment_100"/>
+</LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_700">#4527a0</color>
+    <color name="pink_700">#7b1fa2</color>
+    <color name="purple_900">#140078</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="divider">#D8E5FF9D</color>
+
+    <color name="gray">#9E8A8989</color>
+    <color name="gray_600">#9E404040</color>
+    <color name="edit_fragment_100">#b39ddb</color>
+    <color name="color_purple150">#9C80CF</color>
+
+    <color name="green_A100">#F4FF81</color>
+    <color name="teal_A100">#A7FFEB</color>
+    <color name="blue_A100">#A7C7FF</color>
+    <color name="pink_A100">#FFA6C4</color>
+
+    <!-- play animations fragment_play-->
+    <color name="deep_orange500">#ff915c</color>
+    <color name="light_yellow200">#FFFDCA</color>
+    <color name="light_green200">#baff89</color>
+
+    <color name="transparent">#80000000</color>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="max_length_list" type="integer">25</item>
+    <item name="max_length_words" type="integer">100</item>
+    <item name="max_length_description" type="integer">300</item>
+</resources>
