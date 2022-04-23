@@ -11,29 +11,35 @@
         android:layout_height="wrap_content"
         android:text="@string/english_word"
         />
+
     <EditText
+        android:id="@+id/english_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/english_edit"
-        android:maxLength="@integer/max_length_words"
+        android:autofillHints="name"
         android:backgroundTint="@color/edit_fragment_100"
         android:hint="@string/en"
-        android:textCursorDrawable="@null"
-        />
+        android:inputType="text"
+        android:maxLength="@integer/max_length_words"
+        android:minHeight="48dp"
+        android:textCursorDrawable="@null" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/ru_word" />
+
     <EditText
+        android:id="@+id/russia_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/russia_edit"
-        android:maxLength="@integer/max_length_words"
+        android:autofillHints="name"
         android:backgroundTint="@color/edit_fragment_100"
         android:hint="@string/ru"
-        android:textCursorDrawable="@null"
-        />
+        android:inputType="text"
+        android:maxLength="@integer/max_length_words"
+        android:minHeight="48dp"
+        android:textCursorDrawable="@null" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

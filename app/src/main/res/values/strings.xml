@@ -63,7 +63,12 @@
     <string name="correct_words">correct words</string>
 
     <!--Alert Dialog for Fragment Play-->
-    <string name="words_in_play">Game</string>
-    <string name="words_correct">Correct</string>
+    <string name="game">Game</string>
+    <string name="correct">Correct</string>
     <string name="translate">translate</string>
+    <string name="play">Play</string>
+    <string name="find">find</string>
+    <string name="data">data</string>
+    <string name="default_">default</string>
+    <string name="looking_for_english">looking for English</string>
 </resources>

@@ -7,8 +7,8 @@
     <item
         android:id="@+id/find"
         android:orderInCategory="100"
-        android:title="find"
-        app:showAsAction="always"
+        android:title="@string/find"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_search"
         app:actionViewClass="android.widget.SearchView"/>
     </group>
@@ -19,13 +19,13 @@
             android:id="@+id/language_en"
             android:checked="true"
             android:orderInCategory="100"
-            android:title="en"
+            android:title="@string/en"
             app:showAsAction="never"
             tools:ignore="ExtraText"/>
     <item
         android:id="@+id/language_ru"
         android:orderInCategory="100"
-        android:title="ru"
+        android:title="@string/ru"
         app:showAsAction="never" />
     </group>
 
@@ -34,13 +34,13 @@
         <item
             android:id="@+id/sort_default"
             android:orderInCategory="100"
-            android:title="default"
+            android:title="@string/default_"
             android:checked="true"
             app:showAsAction="never" />
     <item
         android:id="@+id/sort_data"
         android:orderInCategory="100"
-        android:title="data"
+        android:title="@string/data"
         app:showAsAction="never"
         />
     </group>

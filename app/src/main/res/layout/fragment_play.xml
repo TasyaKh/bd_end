@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_weight="2"
-        android:gravity="right"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="10dp">
@@ -43,13 +42,16 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@null"
+            android:autofillHints="name"
+            android:hint="@string/description"
+            android:inputType="none"
             />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_margin="5dp"
             android:text="@string/words"
             android:textSize="10pt"
             app:layout_constraintEnd_toStartOf="@+id/count_words"
@@ -60,29 +62,31 @@
             android:id="@+id/refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_margin="5dp"
             android:backgroundTint="@color/edit_fragment_100"
             android:src="@drawable/ic_refresh"
             app:layout_constraintEnd_toStartOf="@+id/see_statistic"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/none"/>
 
         <ImageButton
             android:id="@+id/see_statistic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_margin="5dp"
             android:backgroundTint="@color/edit_fragment_100"
             android:src="@drawable/ic_wysiwyg"
             android:tooltipText="@string/correct_words"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/none"/>
 
         <TextView
             android:id="@+id/count_words"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:text="0"
             android:textSize="10pt"
             app:layout_constraintRight_toRightOf="parent"
@@ -108,12 +112,15 @@
             android:layout_height="50dp"
             android:layout_columnSpan="2"
             android:background="@color/divider"
+            android:id="@+id/scrollWord"
             android:layout_gravity="center"
             >
             <TextView
                 android:id="@+id/word"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
 
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
@@ -143,7 +150,9 @@
 
             android:maxLength="@integer/max_length_words"
             android:textSize="14pt"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:autofillHints="name"
+            android:inputType="text"/>
 
         <Button
             android:id="@+id/check"
