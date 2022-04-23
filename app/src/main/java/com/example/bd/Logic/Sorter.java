@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class Sorter {
+
     //Сортировать по ранней дате
-    public Comparator<Word> getDataComparator(){
-        return new Comparator<Word>() {
-            @Override
-            public int compare(Word o1, Word o2) {
-                long one = o1.getId();
-                long two = o2.getId();
-                return Long.compare(one, two);
-            }
-        };
-    }
+    public static Comparator<Word> SORT_BY_FIRST_DATA = (o1, o2) -> {
+        long one = o1.getId();
+        long two = o2.getId();
+        return Long.compare(one, two);
+    };
+
+    public static  Comparator<Word>  SORT_BY_LAST_DATA= (o1, o2) -> {
+        long one = o1.getId();
+        long two = o2.getId();
+        return Long.compare(two, one);
+    };
+
     //Получить слово по его нучалу
-    public ArrayList<Word> getWordsByStartSymbols(ArrayList<Word> words, String startWords, LanguageWord languageWord){
+    public static ArrayList<Word> getWordsByStartSymbols(ArrayList<Word> words, String startWords, LanguageWord languageWord){
         ArrayList<Word> sortWords = new ArrayList<>();
 
         if(languageWord == LanguageWord.ENGLISH){
@@ -29,7 +32,7 @@ public class Sorter {
         return sortWords;
     }
     //Получить все слова по русскому началу слова
-    private ArrayList<Word> getWordsByRus(ArrayList<Word> words, String startWord){
+    private static ArrayList<Word> getWordsByRus(ArrayList<Word> words, String startWord){
         ArrayList<Word> sortWords = new ArrayList<>();
 
         for(Word word:words){
@@ -42,7 +45,7 @@ public class Sorter {
         return sortWords;
     }
     //Получить все слова по английскому началу слова
-    private ArrayList<Word> getWordsByEn(ArrayList<Word> words, String startWord){
+    private static ArrayList<Word> getWordsByEn(ArrayList<Word> words, String startWord){
         ArrayList<Word> sortWords = new ArrayList<>();
 
         for(Word word:words){
@@ -56,13 +59,10 @@ public class Sorter {
     }
     //получить компаратор, который сортирует WordStatistic по Количеству правильно угаданных слов
     public static  Comparator<WordStatistic> getWordStatisticSortCorrectComparator(){
-        return new Comparator<WordStatistic>() {
-            @Override
-            public int compare(WordStatistic o1, WordStatistic o2) {
-                long one = o1.getCountCorrect() - (o1.getAllAttempts() - o1.getCountCorrect());
-                long two = o2.getCountCorrect() - (o2.getAllAttempts() - o2.getCountCorrect());
-                return Long.compare(two,one);
-            }
+        return (o1, o2) -> {
+            long one = o1.getCountCorrect() - (o1.getAllAttempts() - o1.getCountCorrect());
+            long two = o2.getCountCorrect() - (o2.getAllAttempts() - o2.getCountCorrect());
+            return Long.compare(two,one);
         };
     }
 

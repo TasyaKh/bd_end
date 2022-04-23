@@ -21,9 +21,8 @@ public class Fragment_Info extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentInfoBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-        return root;
+        return binding.getRoot();
     }
     //Отобразить содержимое (текст)
     @Override

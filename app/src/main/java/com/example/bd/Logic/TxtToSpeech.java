@@ -1,10 +1,16 @@
 package com.example.bd.Logic;
 
 import android.content.Context;
+import android.media.AudioAttributes;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.Voice;
+import android.util.ArraySet;
 import android.util.Log;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Set;
 
 //TxtToSpeech
 public class TxtToSpeech implements TextToSpeech.OnInitListener {
@@ -34,6 +40,9 @@ public class TxtToSpeech implements TextToSpeech.OnInitListener {
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "This Language is not supported");
+            }else{
+                tts.setPitch(1.2f);
+                tts.setSpeechRate(0.8f);
             }
 
         } else {
@@ -55,7 +64,6 @@ public class TxtToSpeech implements TextToSpeech.OnInitListener {
     }
     //начать говорить
     public void speakOut() {
-
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 }

@@ -15,7 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration; //нужен, чтобы установить связь между кнопками менб+ю и фрагментами
-    private ActivityMainBinding binding; //связывает различные элементы с активностью
+    private ActivityMainBinding binding;              //связывает различные элементы с активностью
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

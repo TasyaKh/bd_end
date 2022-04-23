@@ -10,12 +10,12 @@ public class PlayWithWords {
     }
     private WordStatistic currentWord;              //Текущее выпавшее слово
 
-    private BDWords bdWords;                         //БД слов
+    private final BDWords bdWords;                         //БД слов
     private ArrayList<WordStatistic> priorityWords;  //Приоритетные слова
     private int indexCurrentWord;                    //индекс текущего слова
     private WordSPriority wordSPriority;              //Тип приоритетности слов
     //private int uncorrectMax;
-    private int correctMin;                          //минимальное количество правильных слов
+    private final int correctMin;                          //минимальное количество правильных слов
 
     private ArrayList<WordStatistic> deletedCorrectWords; //удаленные правильные слова
 

@@ -7,8 +7,6 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.bd.Logic.Word;
-
 import java.util.ArrayList;
 
 public class BDWords {
@@ -111,7 +109,7 @@ public class BDWords {
         public ArrayList<Word> selectAllFromEnd() { //выбрать все данные с конца таблицы
             Cursor mCursor = mDataBase.query(TABLE_NAME, null, null, null, null, null, null);
 
-            ArrayList<Word> arr = new ArrayList<Word>();
+            ArrayList<Word> arr = new ArrayList<>();
             mCursor.moveToLast();
             if (!mCursor.isBeforeFirst()) {
                 do {
@@ -132,7 +130,7 @@ public class BDWords {
                 COLUMN_PRIORITY + " > 0", null,
                 null, null, null);
 
-        ArrayList<Word> arrPriority = new ArrayList<Word>();
+        ArrayList<Word> arrPriority = new ArrayList<>();
 
         mCursor.moveToFirst();
         if (!mCursor.isAfterLast()) {
@@ -151,7 +149,7 @@ public class BDWords {
     }
 
         //Создать бд
-        private class OpenHelper extends SQLiteOpenHelper {
+        private static class OpenHelper extends SQLiteOpenHelper {
 
             public OpenHelper(Context context) {
                 super(context, DATABASE_NAME, null, DATABASE_VERSION);

@@ -7,15 +7,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -48,18 +41,15 @@ public class AddNewElem extends Activity {
 
         Button save = findViewById(R.id.save);
 
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Word word = new Word(MyWordID,
-                        ruWord.getText().toString().trim(),
-                        enWord.getText().toString().trim(),"", Color.WHITE);
+        save.setOnClickListener(v -> {
+            Word word = new Word(MyWordID,
+                    ruWord.getText().toString().trim(),
+                    enWord.getText().toString().trim(),"", Color.WHITE);
 
-                Intent intent=getIntent();
-                intent.putExtra("Words",word);
-                setResult(RESULT_OK,intent);
-                finish();
-            }
+            Intent intent=getIntent();
+            intent.putExtra("Words",word);
+            setResult(RESULT_OK,intent);
+            finish();
         });
 
         enWord.addTextChangedListener(new TextChanged(enWord));

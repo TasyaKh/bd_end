@@ -1,12 +1,12 @@
 package com.example.bd.Fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -24,6 +24,7 @@ import com.example.bd.Logic.WordStatistic;
 import com.example.bd.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 //Всплывающий диалог (вызывается, когда во время игры хотим узнать результат наших попыток)
 public class Play_AlertDialog extends AppCompatDialogFragment {
@@ -45,8 +46,8 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
     public Play_AlertDialog(Context context){
         seeTranslate = SeeTranslate.WITHOUT;
         this.context = context;
-        CORRECT_TITLE = context.getResources().getString(R.string.words_correct);
-        IN_GAME_TITLE = context.getResources().getString(R.string.words_in_play);
+        CORRECT_TITLE = context.getResources().getString(R.string.correct);
+        IN_GAME_TITLE = context.getResources().getString(R.string.game);
     }
 
     //Задать View и обработаь событие  по нажатию кнопки сверху
@@ -59,14 +60,11 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
 
         listView.setAdapter(myAdapter);
         //При нажатии на любой элемент разрешить просмотр перевода на родной язык для всех элементов
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(myAdapter.getArrayMyData()!=deletedWords) {
-                    if (seeTranslate == SeeTranslate.WITHOUT) seeTranslate = SeeTranslate.WITH;
-                    else seeTranslate = SeeTranslate.WITHOUT;
-                    updateList();
-                }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            if(myAdapter.getArrayMyData()!=deletedWords) {
+                if (seeTranslate == SeeTranslate.WITHOUT) seeTranslate = SeeTranslate.WITH;
+                else seeTranslate = SeeTranslate.WITHOUT;
+                updateList();
             }
         });
 
@@ -74,31 +72,27 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
         TextView title = root.findViewById(R.id.title);
 
         //Просмотреть слова (правильные или все оставшиеся)
-        seeWords.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NotificationCompat.Builder y = new NotificationCompat.Builder(getContext(),"1");
-                int idIcon = 0;
+        seeWords.setOnClickListener(v -> {
+            NotificationCompat.Builder y = new NotificationCompat.Builder(Objects.requireNonNull(getContext()),"1");
+            int idIcon;
 
-                if(myAdapter.getArrayMyData()==wordStatistics) {
-                    idIcon = R.drawable.ic_navigate_before;
-                    myAdapter.setArrayMyData(deletedWords);
-                    seeTranslate = SeeTranslate.WITH;
-                    title.setText(CORRECT_TITLE);
-                }
-                else {
-                    idIcon = R.drawable.ic_navigate_next;
-                    myAdapter.setArrayMyData(wordStatistics);
-                    seeTranslate = SeeTranslate.WITHOUT;
-                    title.setText(IN_GAME_TITLE);
-                }
-
-                if(idIcon>0)
-                    y.setSmallIcon(idIcon);
-
-                seeWords.setImageIcon(y.build().getSmallIcon());
-                updateList();
+            if(myAdapter.getArrayMyData()==wordStatistics) {
+                idIcon = R.drawable.ic_navigate_before;
+                myAdapter.setArrayMyData(deletedWords);
+                seeTranslate = SeeTranslate.WITH;
+                title.setText(CORRECT_TITLE);
             }
+            else {
+                idIcon = R.drawable.ic_navigate_next;
+                myAdapter.setArrayMyData(wordStatistics);
+                seeTranslate = SeeTranslate.WITHOUT;
+                title.setText(IN_GAME_TITLE);
+            }
+
+            y.setSmallIcon(idIcon);
+
+            seeWords.setImageIcon(y.build().getSmallIcon());
+            updateList();
         });
 
         return root;
@@ -138,8 +132,8 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
     //адаптер отвечающий за показ слов и текуще  статистики
     class DialogListAdapter extends BaseAdapter {
 
-        private final int correctMin = 3;                 //Допустимое число некорректных слов
-        private LayoutInflater mLayoutInflater;           //привязывает все лайоуты (прямоугольники со словами к фрагменту)
+        //Допустимое число некорректных слов
+        private final LayoutInflater mLayoutInflater;           //привязывает все лайоуты (прямоугольники со словами к фрагменту)
         private ArrayList<WordStatistic> arrayMyWords;    //Массив со словами статистики
 
         public DialogListAdapter(Context ctx, ArrayList<WordStatistic> arr) {
@@ -162,9 +156,8 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
         }
         //Получить элемент с массива со словами по индексу
         public Word getItem(int position) {
-            Word wr = arrayMyWords.get(position);
 
-            return wr;
+            return arrayMyWords.get(position);
         }
         //Получить id элемента по индексу
         public long getItemId(int position) {
@@ -176,6 +169,7 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
             return 0;
         }
         //Получить Layout, где прописываются слова
+        @SuppressLint({"InflateParams", "SetTextI18n"})
         public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
@@ -191,7 +185,7 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
 
             id.setBackgroundColor(getColorByPriority(wr.getPriority()));
 
-            String txt = "";
+            String txt;
             int uncorrectWords = wr.getAllAttempts()-wr.getCountCorrect();
             id.setText(wr.getCountCorrect()+"/\n"+uncorrectWords);
 
@@ -221,15 +215,15 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
         }
         //Получить цвет в соответствии с количеством правильных и неправильныъ слов
         private int getColorCorrectIncorrect(WordStatistic wr){
-            int color = -1;
+            int color;
 
                 int incorrect = wr.getAllAttempts()-wr.getCountCorrect();
                 int correct = wr.getCountCorrect();
 
                 if (incorrect< correct)
-                    color = getResources().getColor(R.color.blue_A100);
-                else if(incorrect==correct)color = getResources().getColor(R.color.gray);
-                else color = getResources().getColor(R.color.pink_A100);
+                    color = getResources().getColor(R.color.blue_A100, getResources().newTheme());
+                else if(incorrect==correct)color = getResources().getColor(R.color.gray, getResources().newTheme());
+                else color = getResources().getColor(R.color.pink_A100, getResources().newTheme());
 
             return color;
 
