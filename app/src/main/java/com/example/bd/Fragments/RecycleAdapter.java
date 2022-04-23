@@ -1,29 +1,31 @@
 package com.example.bd.Fragments;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bd.Logic.BDWords;
 import com.example.bd.Logic.LanguageWord;
-import com.example.bd.Logic.SortWordBy;
+import com.example.bd.Logic.SortWord;
 import com.example.bd.Logic.Sorter;
 import com.example.bd.Logic.Word;
 import com.example.bd.R;
 
 import java.util.ArrayList;
 
-public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder>{
+public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragments.RecycleAdapter.ViewHolder>{
 
     private LanguageWord languageWord;                  //язык сортировки
-    private SortWordBy sortWordBy;                      //параметры сортировки сортировать (по дате, по умолчанию, по имени)
+    private SortWord sortWord;                          //параметры сортировки сортировать (по дате, по умолчанию, по имени)
     private final LayoutInflater mLayoutInflater;       //привязывает все лайоуты (прямоугольники со словами к фрагменту)
     private String sortStartWords;                      //Если нужно отсортирвоать слово по определенным буквам
 
@@ -31,73 +33,80 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     private final Context context;
     private int lastPositionAppear = -1;
 
-    public RecycleAdapter(Context ctx, ArrayList<Word> arr) {
+    private final BDWords bdWords;
+    private final Fragment_Home.IGoneL IGoneLayout;
+
+    public RecycleAdapter(Context ctx, ArrayList<Word> arr, Fragment_Home.IGoneL IGoneLayout) {
         mLayoutInflater = LayoutInflater.from(ctx);
         this.context = ctx;
-        //  languageWord = LanguageWord.ENGLISH;
-        //sortWordBy = SortWordBy.DEFAULT;
+        bdWords = new BDWords(ctx);
+        this.IGoneLayout = IGoneLayout;
+
+        languageWord = LanguageWord.ENGLISH;
+        sortWord = SortWord.LAST_DATA;
 
         sortStartWords = "";
         setArrayMyData(arr);
     }
 
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public com.example.bd.Fragments.RecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = mLayoutInflater.inflate(R.layout.list_design, parent, false);
         return new ViewHolder(view);
     }
-
+    //static int cnt = 0;
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Word word = words.get(position);
-        String ru = word.getRuWord();
-        String en = word.getEnglishWord();
-        String pos = String.valueOf(position);
+    public void onBindViewHolder(com.example.bd.Fragments.RecycleAdapter.ViewHolder holder, int position) {
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                words.remove(holder.getLayoutPosition());
+       // Log.d("speed scroll",String.valueOf(cnt++));
 
-                notifyItemRemoved(holder.getLayoutPosition());
-                notifyItemRangeChanged(holder.getLayoutPosition(), words.size());
-                return false;
+        holder.itemView.setOnLongClickListener(v -> {
+            int posit = holder.getLayoutPosition();
+
+            long id_word = getItemId(posit);
+
+            bdWords.delete(id_word);
+            words.remove(posit);
+
+            if(posit<getSizeArray()){
+                IGoneLayout.setAllData(getItem(posit),posit);
+            }else {//if(goneLayout.editingWord!=null){
+                IGoneLayout.visible(false);
+            }
+
+            notifyItemRemoved(holder.getLayoutPosition());
+            notifyItemRangeChanged(holder.getLayoutPosition(), words.size());
+
+            Toast.makeText(context, "Removed", Toast.LENGTH_SHORT).show();
+            return false;
+        });
+
+        holder.itemView.setOnClickListener(v -> {
+
+            if(holder.getLayoutPosition()>=0){
+                IGoneLayout.setAllData(getItem(holder.getLayoutPosition()),holder.getLayoutPosition());
+                IGoneLayout.visible(true);
             }
         });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                    LinearLayout linearLayout = holder.itemView.findViewById(R.id.gone_layout);
-                    if(linearLayout!=null) {
-                       // goneLayout.setAllData(getItem(holder.getLayoutPosition()));
-                        linearLayout.setVisibility(View.VISIBLE);
-                    }
-            }
-        });
 
         Word wr = words.get(position);
-        holder.id.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wr.updatePriority();
-               // bdWords.update(wr);
+        holder.id.setOnClickListener(v -> {
+            wr.updatePriority();
+            bdWords.update(wr);
 
-                holder.id.setBackgroundColor(getColorByPriority(wr.getPriority()));
-            }
+            holder.id.setBackgroundColor(getColorByPriority(wr.getPriority()));
         });
 
         holder.id.setBackgroundColor(getColorByPriority(wr.getPriority()));
         holder.id.setText(String.valueOf(position + 1));
 
-        languageSort(holder.itemView,wr);
+        languageSort(holder,wr);
 
-        holder.setEn(en);
-        holder.setRu(ru);
-        holder.setPos(pos);
+        holder.setPos();
 
         setAnimation(holder.itemView, position);
     }
@@ -111,6 +120,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         if (position > lastPositionAppear)
         {
             Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            animation.setDuration(250);
             viewToAnimate.startAnimation(animation);
             lastPositionAppear = position;
         }else{
@@ -124,15 +134,16 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         return words.size();
     }
 
-
     //задать слово, по которому сортируем лист
     public void setSortStartWords(String sortStartWords) {
         this.sortStartWords = sortStartWords;
     }
+
     //Задать сортировать по (дата, по умолчанию)
-    public void setSortWordBy(SortWordBy sortWordBy) {
-        this.sortWordBy = sortWordBy;
+    public void setSortWord(SortWord sortWord) {
+        this.sortWord = sortWord;
     }
+
     //задать язык сортировки
     public void setLanguageSortWord(LanguageWord languageWord) {
         this.languageWord = languageWord;
@@ -141,7 +152,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     //задать массив с данными слов
     public void setArrayMyData(ArrayList<Word> arrayMyData) {
         this.words = arrayMyData;
-        //sortWordBy();
+        sortWord();
     }
 
     public int getSizeArray(){
@@ -149,26 +160,36 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     }
 
     //Сортирвоать слово по дате или по умолчанию
-    private void sortWordBy(){
-        Sorter sorter = new Sorter();
+    public void sortWord(){
 
-        switch (sortWordBy){
+        switch (sortWord){
 
-            case DATA:
-                words.sort(sorter.getDataComparator());
+            case FIRST_DATA:
+                words.sort(Sorter.SORT_BY_FIRST_DATA);
+                break;
+            case LAST_DATA:
+                words.sort(Sorter.SORT_BY_LAST_DATA);
                 break;
             case NAME:
-                words = sorter.getWordsByStartSymbols(words, sortStartWords, languageWord);
+                words = Sorter.getWordsByStartSymbols(words, sortStartWords, languageWord);
                 break;
 
         }
-    };
+    }
+
+    public void delete(Word word){
+        words.remove(word);
+    }
+
+    public void updateById(Word word, int positionInList){
+        //long []ids = words.
+        words.set(positionInList,word);
+    }
 
     //Получить элемент с массива со словами по индексу
     public Word getItem(int position) {
-        Word wr = words.get(position);
 
-        return wr;
+        return words.get(position);
     }
     //Получить id элепмента по индексу
     public long getItemId(int position) {
@@ -187,31 +208,28 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         return word;
     }
     //Задать язык сортировки
-    private void languageSort(View convertView, Word wr){
+    private void languageSort(com.example.bd.Fragments.RecycleAdapter.ViewHolder holder, Word wr){
 
-        TextView ru= convertView.findViewById(R.id.ru);
-        TextView en =convertView.findViewById(R.id.en);
+        TextView ru= holder.ru;
+        TextView en = holder.en;
 
-        String eng = "";
-        String rus = "";
+        String eng = wr.getEnglishWord();
+        String rus = wr.getRuWord();
 
-        eng = wr.getEnglishWord();
-        rus = wr.getRuWord();
+        int maxLength =context.getResources().getInteger(R.integer.max_length_list);
 
-        int maxLength = 50;
-
-//        if(languageWord != LanguageWord.RUSSIAN){
-//            en.setText(constraintSizeWord(maxLength,eng));
-//            ru.setText(constraintSizeWord(maxLength,rus));
-       // }else {
+        if(languageWord != LanguageWord.RUSSIAN){
+            en.setText(constraintSizeWord(maxLength,eng));
+            ru.setText(constraintSizeWord(maxLength,rus));
+        }else {
             en.setText(constraintSizeWord(maxLength,rus));
             ru.setText(constraintSizeWord(maxLength,eng));
-        //}
+        }
 
     }
     //Задать приоритет слова (покрасить ячейку со словом сбоку, в соответствии с приоритетом)
     private int getColorByPriority(int priority) {
-       // Resources res = getResources();
+        Resources res = context.getResources();
         int color = 0;
 
         switch (priority) {
@@ -219,10 +237,10 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
                 color = 0;
                 break;
             case 1:
-                color= Color.RED;
+                color= res.getColor(R.color.teal_A100,res.newTheme());
                 break;
             case 2:
-                color = Color.BLUE;
+                color =  res.getColor(R.color.green_A100,res.newTheme());
                 break;
         }
 
@@ -240,20 +258,10 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
             en = view.findViewById(R.id.en);
             ru = view.findViewById(R.id.ru);
             id = view.findViewById(R.id.id_num);
-
         }
 
-        public void setEn(String word){
-            en.setText(word);
-        }
-
-        public void setRu(String word){
-            ru.setText(word);
-        }
-
-        public void setPos(String word){
-            id.setText(word);
+        public void setPos(){
+            id.setText(String.valueOf(getLayoutPosition()+1));
         }
     }
 }
-
