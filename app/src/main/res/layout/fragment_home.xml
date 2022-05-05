@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +8,6 @@
     tools:context=".Fragments.Fragment_Home"
     android:layout_margin="5dp"
    >
-
 
     <Button
         android:layout_width="match_parent"
@@ -17,160 +17,168 @@
         android:backgroundTint="@color/edit_fragment_100"
         android:layout_marginHorizontal="5dp"/>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gone_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/edit_fragment_100"
         android:layout_margin="5dp"
-        android:id="@+id/gone_layout"
         android:animateLayoutChanges="true"
-        android:baselineAligned="false">
+        android:background="@color/edit_fragment_100"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="6"
-            android:layout_margin="10dp"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/english_word"
-                android:textColor="@color/gray_600"
-                />
 
-            <EditText
-                android:id="@+id/english_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:maxHeight="80dp"
-                android:maxLength="@integer/max_length_words"
-                android:textCursorDrawable="@null"
-                android:background="@null"
-                android:autofillHints="name"
-                android:inputType="text"
-                android:hint="@string/en"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/ru_word"
-                android:textColor="@color/gray_600"
-                />
+            android:text="@string/english_word"
+            android:textColor="@color/gray_600"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/russia_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:maxHeight="80dp"
-                android:maxLength="@integer/max_length_words"
-                android:textCursorDrawable="@null"
-                android:background="@null"
-                android:inputType="text"
-                android:autofillHints="name"
-                android:hint="@string/ru"
-                />
+        <EditText
+            android:id="@+id/english_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:autofillHints="name"
+            android:background="@null"
+            android:hint="@string/en"
+            android:inputType="text"
+            android:maxHeight="80dp"
+            android:maxLength="@integer/max_length_words"
+            android:minHeight="48dp"
+            android:textCursorDrawable="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/description"
-                android:textColor="@color/gray_600"
-                />
-
-            <EditText
-                android:id="@+id/description_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:scrollbarDefaultDelayBeforeFade="400"
-                android:scrollbarFadeDuration="5000"
-                android:scrollbarSize="6dp"
-                android:scrollbars="vertical"
-                android:textColorHighlight="@color/divider"
-                android:textColorLink="@color/divider"
-                android:maxHeight="120dp"
-                android:maxLength="@integer/max_length_description"
-                android:textCursorDrawable="@null"
-                android:background="@drawable/shape_home"
-                android:inputType="text"
-                android:autofillHints="name"
-                android:hint="@string/none"
-               />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:minWidth="60dp"
-            android:orientation="vertical">
-            <ImageButton
-                android:id="@+id/speak"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/edit_fragment_100"
-                android:minWidth="50dp"
-                android:minHeight="50dp"
-                android:src="@drawable/ic_volume_up"
-                android:contentDescription="@string/none"/>
+            android:layout_height="wrap_content"
+            android:text="@string/ru_word"
+            android:textColor="@color/gray_600"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/english_edit" />
 
-            <ImageButton
-                android:id="@+id/save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/edit_fragment_100"
-                android:minWidth="50dp"
-                android:minHeight="50dp"
-                android:src="@drawable/ic_done"
-                android:contentDescription="@string/none"/>
+        <EditText
+            android:id="@+id/russia_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:autofillHints="name"
+            android:background="@null"
+            android:hint="@string/ru"
+            android:inputType="text"
+            android:maxHeight="80dp"
+            android:maxLength="@integer/max_length_words"
+            android:minHeight="48dp"
+            android:textCursorDrawable="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <ImageButton
-                android:id="@+id/delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/edit_fragment_100"
-                android:minWidth="50dp"
-                android:minHeight="50dp"
-                android:src="@drawable/ic_delete"
-                android:contentDescription="@string/none"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageButton
-                    android:id="@+id/close"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginEnd="10dp"
-                    android:backgroundTint="@color/edit_fragment_100"
-                    android:minWidth="50dp"
-                    android:minHeight="50dp"
-                    android:src="@drawable/ic_baseline"
-                    android:contentDescription="@string/none"/>
-            </LinearLayout>
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description"
+            android:textColor="@color/gray_600"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/russia_edit" />
 
 
-        </LinearLayout>
+        <EditText
+            android:id="@+id/description_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:autofillHints="name"
+            android:background="@drawable/shape_home"
+            android:hint="@string/none"
+            android:inputType="textMultiLine"
+            android:maxHeight="100dp"
+            android:maxLength="@integer/max_length_description"
+            android:minHeight="48dp"
+            android:scrollbarDefaultDelayBeforeFade="400"
+            android:scrollbarFadeDuration="5000"
+            android:scrollbarSize="6dp"
+            android:scrollbars="vertical"
+            android:textColorHighlight="@color/divider"
+            android:textColorLink="@color/divider"
+            android:textCursorDrawable="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintVertical_bias="0.0" />
 
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/speak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/edit_fragment_100"
+            android:contentDescription="@string/none"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:src="@drawable/ic_volume_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/edit_fragment_100"
+            android:contentDescription="@string/none"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:src="@drawable/ic_done"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/delete" />
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/edit_fragment_100"
+            android:contentDescription="@string/none"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/speak" />
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/edit_fragment_100"
+            android:contentDescription="@string/none"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:src="@drawable/ic_baseline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/save" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:scrollbars="vertical"
+        android:layout_margin="5dp"
         >
 
     </androidx.recyclerview.widget.RecyclerView>
