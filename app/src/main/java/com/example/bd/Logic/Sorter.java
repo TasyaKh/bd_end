@@ -58,12 +58,10 @@ public class Sorter {
         return sortWords;
     }
     //получить компаратор, который сортирует WordStatistic по Количеству правильно угаданных слов
-    public static  Comparator<WordStatistic> getWordStatisticSortCorrectComparator(){
-        return (o1, o2) -> {
+    public static  Comparator<WordStatistic>  SORT_BY_CORRECT= (o1, o2) -> {
             long one = o1.getCountCorrect() - (o1.getAllAttempts() - o1.getCountCorrect());
             long two = o2.getCountCorrect() - (o2.getAllAttempts() - o2.getCountCorrect());
             return Long.compare(two,one);
         };
-    }
 
 }

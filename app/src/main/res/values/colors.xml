@@ -14,10 +14,10 @@
     <color name="edit_fragment_100">#b39ddb</color>
     <color name="color_purple150">#9C80CF</color>
 
-    <color name="green_A100">#F4FF81</color>
-    <color name="teal_A100">#A7FFEB</color>
-    <color name="blue_A100">#A7C7FF</color>
-    <color name="pink_A100">#FFA6C4</color>
+    <color name="green_A100">#F8FFB3</color>
+    <color name="teal_A100">#CCFFF3</color>
+    <color name="blue_A100">#C7DBFF</color>
+    <color name="pink_A100">#FFC3D7</color>
 
     <!-- play animations fragment_play-->
     <color name="deep_orange500">#ff915c</color>

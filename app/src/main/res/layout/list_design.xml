@@ -21,6 +21,7 @@
         android:layout_marginStart="5dp"
         android:orientation="vertical"
         android:id="@+id/words_theme"
+        android:background="@drawable/style_on_click"
        >
 
         <TextView

@@ -1,6 +1,8 @@
 package com.example.bd.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -80,16 +83,17 @@ public class Fragment_Play extends Fragment {
         //Посмотреть статистику (правильные и неправильные слова)
         statistic.setOnClickListener(v -> {
 
-            FragmentManager manager = getParentFragmentManager();
+           // FragmentManager manager = getChildFragmentManager();
 
             ArrayList<WordStatistic> listWords = playWithWords.getPriorityWords();
 
-            //Не оптимизированно
-            listWords.sort(Sorter.getWordStatisticSortCorrectComparator());
+            //Не оптимизировано
+            listWords.sort(Sorter.SORT_BY_CORRECT);
             fragmentAlertDialog.setWordStatistics(listWords);
             fragmentAlertDialog.setDeletedWords(playWithWords.getCorrectWords());
 
-            fragmentAlertDialog.show(manager, "myDialog");
+
+            fragmentAlertDialog.show();
 
         });
 
@@ -235,6 +239,7 @@ public class Fragment_Play extends Fragment {
     //Уничтожить View
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         binding = null;
     }

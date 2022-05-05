@@ -36,6 +36,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
     private final BDWords bdWords;
     private final Fragment_Home.IGoneL IGoneLayout;
 
+    private int selectedPos;
+
     public RecycleAdapter(Context ctx, ArrayList<Word> arr, Fragment_Home.IGoneL IGoneLayout) {
         mLayoutInflater = LayoutInflater.from(ctx);
         this.context = ctx;
@@ -43,12 +45,21 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
         this.IGoneLayout = IGoneLayout;
 
         languageWord = LanguageWord.ENGLISH;
-        sortWord = SortWord.LAST_DATA;
+        sortWord = SortWord.DEFAULT;
 
         sortStartWords = "";
+
+        selectedPos = RecyclerView.NO_POSITION;
         setArrayMyData(arr);
     }
 
+    public LanguageWord getLanguageWord() {
+        return languageWord;
+    }
+
+    public SortWord getSortWord() {
+        return sortWord;
+    }
 
     @NonNull
     @Override
@@ -62,6 +73,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
     public void onBindViewHolder(com.example.bd.Fragments.RecycleAdapter.ViewHolder holder, int position) {
 
        // Log.d("speed scroll",String.valueOf(cnt++));
+        holder.itemView.setSelected(selectedPos==position);
 
         holder.itemView.setOnLongClickListener(v -> {
             int posit = holder.getLayoutPosition();
@@ -89,6 +101,10 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
             if(holder.getLayoutPosition()>=0){
                 IGoneLayout.setAllData(getItem(holder.getLayoutPosition()),holder.getLayoutPosition());
                 IGoneLayout.visible(true);
+
+                notifyItemChanged(selectedPos);
+                selectedPos = holder.getLayoutPosition();
+                notifyItemChanged(selectedPos);
             }
         });
 
@@ -167,7 +183,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
             case FIRST_DATA:
                 words.sort(Sorter.SORT_BY_FIRST_DATA);
                 break;
-            case LAST_DATA:
+            case DEFAULT:
                 words.sort(Sorter.SORT_BY_LAST_DATA);
                 break;
             case NAME:
@@ -240,7 +256,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
                 color= res.getColor(R.color.teal_A100,res.newTheme());
                 break;
             case 2:
-                color =  res.getColor(R.color.green_A100,res.newTheme());
+                color =  res.getColor(R.color.pink_A100,res.newTheme());
                 break;
         }
 
