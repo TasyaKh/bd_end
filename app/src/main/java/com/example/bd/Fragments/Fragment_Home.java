@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.MenuCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,7 +67,8 @@ public class Fragment_Home extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        LinearLayout layout = view.findViewById(R.id.gone_layout);
+
+        ConstraintLayout layout = view.findViewById(R.id.gone_layout);
 
         goneLayout = new GoneLayout(layout);
         layout.setVisibility(View.GONE);
@@ -79,12 +80,12 @@ public class Fragment_Home extends Fragment{
 
         bdWords = new BDWords(getContext());
 
-        // for (int i=0;i<50000;i++)bdWords.insert("hello" + i,"привет","-");
+        //for (int i=0;i<50;i++)bdWords.insert("hello" + i,"привет","-");
 
         //Лист для просмтора слов
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         myAdapter= new RecycleAdapter(getContext(),
-                bdWords.selectAllFromEnd(),(GoneLayout)goneLayout);
+                bdWords.selectAllFromEnd(), goneLayout);
 
         //Задать адаптер
         recyclerView.setAdapter(myAdapter);
@@ -115,33 +116,31 @@ public class Fragment_Home extends Fragment{
         MenuItem sortRu = menu.findItem(R.id.language_ru);
         MenuItem sortData = menu.findItem(R.id.sort_data);
         MenuItem sortDefault = menu.findItem(R.id.sort_default);
+        //загрузить сохраненные настройки для типа сортировки по дате
+        FHome_SaveSettings fHomeSaveSettings = new FHome_SaveSettings(Objects.requireNonNull(getContext()));
+        SortWord sortWord = fHomeSaveSettings.loadSettingsSortWord();
 
-        //По нажатию на любой элемент в меню
-        @SuppressLint({"NonConstantResourceId", "NotifyDataSetChanged"}) MenuItem.OnMenuItemClickListener on = item -> {
-            switch (item.getItemId()){
+        switch (sortWord) {
+            case DEFAULT:
+                onOptionsItemSelected(sortDefault);
+                break;
+            case FIRST_DATA:
+                onOptionsItemSelected(sortData);
+                break;
+            case NAME:
+                break;
+        }
+        //загрузить сохраненные настройки по типу сортировки языка слова
+        LanguageWord languageWord = fHomeSaveSettings.loadSettingsLanguageWord();
 
-                case R.id.language_en:
-                    myAdapter.setLanguageSortWord(LanguageWord.ENGLISH);
-                    break;
-                case R.id.language_ru:
-                    myAdapter.setLanguageSortWord(LanguageWord.RUSSIAN);
-                    break;
-
-                case R.id.sort_default:
-                    myAdapter.setSortWord(SortWord.LAST_DATA);
-                    myAdapter.sortWord();
-                    break;
-                case R.id.sort_data:
-                    myAdapter.setSortWord(SortWord.FIRST_DATA);
-                    myAdapter.sortWord();
-                    break;
-            }
-
-            item.setChecked(true);
-            myAdapter.notifyDataSetChanged();
-            //updateList(0,myAdapter.getSizeArray());
-            return false;
-        };
+        switch (languageWord) {
+            case ENGLISH:
+                onOptionsItemSelected(sortEn);
+                break;
+            case RUSSIAN:
+                onOptionsItemSelected(sortRu);
+                break;
+        }
 
         searchView = (SearchView) sortFind.getActionView();
         searchView.setQueryHint("Search");
@@ -169,23 +168,60 @@ public class Fragment_Home extends Fragment{
         });
 
         searchView.setOnCloseListener(() -> {
-            sortDefault.setChecked(true);
-            myAdapter.setSortWord(SortWord.LAST_DATA);
+            onOptionsItemSelected(sortDefault);
             updateList();
             return false;
         });
+    }
 
-        sortEn.setOnMenuItemClickListener(on);
-        sortRu.setOnMenuItemClickListener(on);
-        sortData.setOnMenuItemClickListener(on);
-        sortDefault.setOnMenuItemClickListener(on);
+    //По нажатию на любой элемент в меню
+    @SuppressLint({"NonConstantResourceId", "NotifyDataSetChanged"})
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        FHome_SaveSettings saveSettings = new FHome_SaveSettings(Objects.requireNonNull(getContext()));
+
+        switch (item.getItemId()){
+
+            case R.id.language_en:
+                LanguageWord languageWord = LanguageWord.ENGLISH;
+                myAdapter.setLanguageSortWord(languageWord);
+                saveSettings.saveLanguageWord(languageWord);
+                break;
+            case R.id.language_ru:
+                languageWord = LanguageWord.RUSSIAN;
+                myAdapter.setLanguageSortWord(languageWord);
+                saveSettings.saveLanguageWord(languageWord);
+                break;
+
+            case R.id.sort_default:
+                SortWord sortWord = SortWord.DEFAULT;
+                myAdapter.setSortWord(sortWord);
+                saveSettings.saveSortWord(sortWord);
+
+                myAdapter.sortWord();
+                break;
+            case R.id.sort_data:
+                sortWord = SortWord.FIRST_DATA;
+                myAdapter.setSortWord(sortWord);
+                saveSettings.saveSortWord(sortWord);
+
+                myAdapter.sortWord();
+                break;
+        }
+
+        item.setChecked(true);
+        myAdapter.notifyDataSetChanged();
+        //updateList(0,myAdapter.getSizeArray());
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onDestroyView() {
+        //binding = null;
+       // goneLayout.visible(false);
         super.onDestroyView();
-        binding = null;
-        goneLayout.visible(false);
+
+       // saveSettings();
     }
 
     //обновляем данные в листе
@@ -219,10 +255,10 @@ public class Fragment_Home extends Fragment{
 
         private Word editingWord;                  //текущее слово, которое редактируем
         private int positionInList;
-        private final LinearLayout editLayout;  //Лайоут, на котором васе редактирвоание происходит
+        private final ConstraintLayout editLayout;  //Лайоут, на котором васе редактирвоание происходит
         private final TxtToSpeech toSpeech;           //Класс, отвечабщий за произношение слова, нужен для озвучивания англ слова
 
-        public GoneLayout(LinearLayout goneLayout){
+        public GoneLayout(ConstraintLayout goneLayout){
             View view = getView();
             positionInList = 0;
 
@@ -274,9 +310,7 @@ public class Fragment_Home extends Fragment{
                 myAdapter.delete(editingWord);
                 myAdapter.notifyItemRemoved(positionInList);
                 //updateList(0,myAdapter.getSizeArray());
-
-                LinearLayout edit = view.findViewById(R.id.gone_layout);
-                if(edit!=null)edit.setVisibility(View.GONE);
+                visible(false);
 
                 Toast.makeText(getContext(),"Deleted", Toast.LENGTH_SHORT).show();
             });
