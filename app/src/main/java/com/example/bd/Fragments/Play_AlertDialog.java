@@ -13,11 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.bd.Logic.Word;
 import com.example.bd.Logic.WordStatistic;
@@ -27,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 //Всплывающий диалог (вызывается, когда во время игры хотим узнать результат наших попыток)
-public class Play_AlertDialog extends AppCompatDialogFragment {
+public class Play_AlertDialog extends AppCompatDialog {
 
     private enum SeeTranslate{
         WITH, WITHOUT
@@ -38,26 +35,26 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
     private SeeTranslate seeTranslate;                  //Можно ли просмотреть перевод слова на родном языке
 
     private DialogListAdapter myAdapter;                //адаптер для листа для просмотра списка слов
-    private Context context;
 
     private static String CORRECT_TITLE;
     private static String IN_GAME_TITLE;
 
     public Play_AlertDialog(Context context){
+        super(context);
         seeTranslate = SeeTranslate.WITHOUT;
-        this.context = context;
         CORRECT_TITLE = context.getResources().getString(R.string.correct);
         IN_GAME_TITLE = context.getResources().getString(R.string.game);
     }
 
-    //Задать View и обработаь событие  по нажатию кнопки сверху
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_alert_dialog,container);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_alert_dialog);
+        //View root = inflater.inflate(,container);
         myAdapter = new DialogListAdapter(getContext(), wordStatistics);
-        ListView listView = root.findViewById(R.id.listView);
+        ListView listView = findViewById(R.id.listView);
 
+        assert listView != null;
         listView.setAdapter(myAdapter);
         //При нажатии на любой элемент разрешить просмотр перевода на родной язык для всех элементов
         listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -68,10 +65,11 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
             }
         });
 
-        ImageButton seeWords = root.findViewById(R.id.correct_all);
-        TextView title = root.findViewById(R.id.title);
+        ImageButton seeWords = findViewById(R.id.correct_all);
+        TextView title = findViewById(R.id.title);
 
         //Просмотреть слова (правильные или все оставшиеся)
+        assert seeWords != null;
         seeWords.setOnClickListener(v -> {
             NotificationCompat.Builder y = new NotificationCompat.Builder(Objects.requireNonNull(getContext()),"1");
             int idIcon;
@@ -80,12 +78,14 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
                 idIcon = R.drawable.ic_navigate_before;
                 myAdapter.setArrayMyData(deletedWords);
                 seeTranslate = SeeTranslate.WITH;
+                assert title != null;
                 title.setText(CORRECT_TITLE);
             }
             else {
                 idIcon = R.drawable.ic_navigate_next;
                 myAdapter.setArrayMyData(wordStatistics);
                 seeTranslate = SeeTranslate.WITHOUT;
+                assert title != null;
                 title.setText(IN_GAME_TITLE);
             }
 
@@ -95,8 +95,9 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
             updateList();
         });
 
-        return root;
     }
+    //Задать View и обработаь событие  по нажатию кнопки сверху
+
     //обновить ListView
     private void updateList () {
         //каждый раз отправляем данные по новой
@@ -110,11 +111,7 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
     public void setDeletedWords(ArrayList<WordStatistic> deletedWords){
         this.deletedWords = deletedWords;
     }
-//    //По событию show
-//    @Override
-//    public void show(@NonNull FragmentManager manager, @Nullable String tag) {
-//        super.show(manager, tag);
-//    }
+
     //Срабатывает при закрытии Dialog
     @Override
     public void dismiss() {
@@ -124,10 +121,12 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
     }
 
     @Override
-    public void show(@NonNull FragmentManager manager, @Nullable String tag) {
-        super.show(manager, tag);
+    public void show() {
+        super.show();
         seeTranslate = SeeTranslate.WITHOUT;
     }
+
+
 
     //адаптер отвечающий за показ слов и текуще  статистики
     class DialogListAdapter extends BaseAdapter {
@@ -168,6 +167,8 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
             }
             return 0;
         }
+
+
         //Получить Layout, где прописываются слова
         @SuppressLint({"InflateParams", "SetTextI18n"})
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -190,7 +191,7 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
             id.setText(wr.getCountCorrect()+"/\n"+uncorrectWords);
 
             txt = wr.getEnglishWord();
-            int maxLength = getResources().getInteger(R.integer.max_length_list);
+            int maxLength = getContext().getResources().getInteger(R.integer.max_length_list);
 
             en.setText(constraintSizeWord(maxLength,txt));
 
@@ -215,15 +216,16 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
         }
         //Получить цвет в соответствии с количеством правильных и неправильныъ слов
         private int getColorCorrectIncorrect(WordStatistic wr){
+            Resources res = getContext().getResources();
             int color;
 
                 int incorrect = wr.getAllAttempts()-wr.getCountCorrect();
                 int correct = wr.getCountCorrect();
 
                 if (incorrect< correct)
-                    color = getResources().getColor(R.color.blue_A100, getResources().newTheme());
-                else if(incorrect==correct)color = getResources().getColor(R.color.gray, getResources().newTheme());
-                else color = getResources().getColor(R.color.pink_A100, getResources().newTheme());
+                    color =res.getColor(R.color.blue_A100, res.newTheme());
+                else if(incorrect==correct)color = res.getColor(R.color.gray, res.newTheme());
+                else color = res.getColor(R.color.pink_A100, res.newTheme());
 
             return color;
 
@@ -231,7 +233,7 @@ public class Play_AlertDialog extends AppCompatDialogFragment {
 
         //в зависимости от приоритета слова добавляем цветной блок слева
         private int getColorByPriority(int priority) {
-            Resources res = getResources();
+            Resources res = getContext().getResources();
             int color = 0;
 
             switch (priority) {
