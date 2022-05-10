@@ -29,15 +29,17 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
     private final LayoutInflater mLayoutInflater;       //привязывает все лайоуты (прямоугольники со словами к фрагменту)
     private String sortStartWords;                      //Если нужно отсортирвоать слово по определенным буквам
 
-    private ArrayList<Word> words;
-    private final Context context;
-    private int lastPositionAppear = -1;
+    private ArrayList<Word> words;                      //массив выводимых слов
+    private final Context context;                      //контекст
 
-    private final BDWords bdWords;
-    private final Fragment_Home.IGoneL IGoneLayout;
+    private int lastPositionAppear = -1;                //нужен чтобы анимация создания нового элемента правильно отображалась
 
-    private int selectedPos;
+    private final BDWords bdWords;                      //база данных слов
+    private final Fragment_Home.IGoneL IGoneLayout;     //при удалении слова, передать просьбу о закрытии лайоута для редактиррвания слова
 
+    private int selectedPos;                            //выделить блок, с которым работаем
+
+    //инициализировать поля класса
     public RecycleAdapter(Context ctx, ArrayList<Word> arr, Fragment_Home.IGoneL IGoneLayout) {
         mLayoutInflater = LayoutInflater.from(ctx);
         this.context = ctx;
@@ -53,14 +55,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
         setArrayMyData(arr);
     }
 
-    public LanguageWord getLanguageWord() {
-        return languageWord;
-    }
-
-    public SortWord getSortWord() {
-        return sortWord;
-    }
-
+    //задать дизайн нашему листу
     @NonNull
     @Override
     public com.example.bd.Fragments.RecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -68,7 +63,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
         View view = mLayoutInflater.inflate(R.layout.list_design, parent, false);
         return new ViewHolder(view);
     }
-    //static int cnt = 0;
+
+    //срабатывает при создании или изменении одного блока в листе
     @Override
     public void onBindViewHolder(com.example.bd.Fragments.RecycleAdapter.ViewHolder holder, int position) {
 
@@ -128,7 +124,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
     }
 
     /**
-     * Here is the key method to apply the animation
+     * задать анимацию создания или обновления блока в листе
      */
     private void setAnimation(View viewToAnimate, int position)
     {
@@ -145,6 +141,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
     }
 
 
+    //получить число элементов в списке words.size()
     @Override
     public int getItemCount() {
         return words.size();
@@ -171,11 +168,12 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
         sortWord();
     }
 
+    //получить размер массива слов
     public int getSizeArray(){
         return words.size();
     }
 
-    //Сортирвоать слово по дате или по умолчанию
+    //Сортировать слово по дате или по умолчанию
     public void sortWord(){
 
         switch (sortWord){
@@ -189,14 +187,20 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
             case NAME:
                 words = Sorter.getWordsByStartSymbols(words, sortStartWords, languageWord);
                 break;
-
         }
+
+        //поменять слово в редактируемом лайоует, т.к. список меняется и пользоваатель видит другую последовательность
+        if(selectedPos>=0 && selectedPos<words.size())
+            IGoneLayout.setAllData(words.get(selectedPos),selectedPos);
+        else selectedPos = -1;
     }
 
+    //удалить слово
     public void delete(Word word){
         words.remove(word);
     }
 
+    //обновить слово по Id в листе
     public void updateById(Word word, int positionInList){
         //long []ids = words.
         words.set(positionInList,word);
@@ -265,9 +269,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
 
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView en;
-        final TextView ru;
-        final TextView id;
+        final TextView en;      //английское слово
+        final TextView ru;      //русское слово
+        final TextView id;      //id слова в листе (порядковый номер)
 
         ViewHolder(View view){
             super(view);
@@ -276,6 +280,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<com.example.bd.Fragment
             id = view.findViewById(R.id.id_num);
         }
 
+        //задать позицию (индекс слова)
         public void setPos(){
             id.setText(String.valueOf(getLayoutPosition()+1));
         }

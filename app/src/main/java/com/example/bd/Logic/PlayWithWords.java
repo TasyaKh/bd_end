@@ -12,9 +12,10 @@ public class PlayWithWords {
 
     private final BDWords bdWords;                         //БД слов
     private ArrayList<WordStatistic> priorityWords;  //Приоритетные слова
+
     private int indexCurrentWord;                    //индекс текущего слова
     private WordSPriority wordSPriority;              //Тип приоритетности слов
-    //private int uncorrectMax;
+
     private final int correctMin;                          //минимальное количество правильных слов
 
     private ArrayList<WordStatistic> deletedCorrectWords; //удаленные правильные слова
@@ -24,7 +25,7 @@ public class PlayWithWords {
         refillWords();
         indexCurrentWord = 0;
         wordSPriority = WordSPriority.PRIORITY;
-       // uncorrectMax = 4;
+
         currentWord = null;
         correctMin =3;
 

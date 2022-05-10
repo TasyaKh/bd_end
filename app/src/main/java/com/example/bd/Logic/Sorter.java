@@ -12,10 +12,18 @@ public class Sorter {
         return Long.compare(one, two);
     };
 
+    //сортировать по последней дате
     public static  Comparator<Word>  SORT_BY_LAST_DATA= (o1, o2) -> {
         long one = o1.getId();
         long two = o2.getId();
         return Long.compare(two, one);
+    };
+
+    //получить компаратор, который сортирует WordStatistic по Количеству правильно угаданных слов
+    public static Comparator<WordStatistic>  SORT_BY_CORRECT= (o1, o2) -> {
+        long one = o1.getCountCorrect() - (o1.getAllAttempts() - o1.getCountCorrect());
+        long two = o2.getCountCorrect() - (o2.getAllAttempts() - o2.getCountCorrect());
+        return Long.compare(two,one);
     };
 
     //Получить слово по его нучалу
@@ -57,11 +65,6 @@ public class Sorter {
         }
         return sortWords;
     }
-    //получить компаратор, который сортирует WordStatistic по Количеству правильно угаданных слов
-    public static  Comparator<WordStatistic>  SORT_BY_CORRECT= (o1, o2) -> {
-            long one = o1.getCountCorrect() - (o1.getAllAttempts() - o1.getCountCorrect());
-            long two = o2.getCountCorrect() - (o2.getAllAttempts() - o2.getCountCorrect());
-            return Long.compare(two,one);
-        };
+
 
 }

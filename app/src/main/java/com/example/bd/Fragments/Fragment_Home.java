@@ -29,6 +29,7 @@ import java.util.Objects;
 
 import com.example.bd.Activities.AddNewElem;
 import com.example.bd.Logic.BDWords;
+import com.example.bd.Logic.FHome_SaveSettings;
 import com.example.bd.Logic.SortWord;
 import com.example.bd.Logic.LanguageWord;
 import com.example.bd.Logic.Word;
@@ -73,14 +74,14 @@ public class Fragment_Home extends Fragment{
         goneLayout = new GoneLayout(layout);
         layout.setVisibility(View.GONE);
 
-        // getContext().deleteDatabase("simple.db");
+        //getContext().deleteDatabase("simple.db");
         Toast.makeText(getContext(), Arrays.toString(Objects.requireNonNull(getContext()).databaseList()), Toast.LENGTH_SHORT).show();
 
         // setContentView(R.layout.fragment_home);
 
         bdWords = new BDWords(getContext());
 
-        //for (int i=0;i<50;i++)bdWords.insert("hello" + i,"привет","-");
+        //for (int i=0;i<100;i++)bdWords.insert("hello" + i,"привет","-");
 
         //Лист для просмтора слов
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
@@ -253,10 +254,10 @@ public class Fragment_Home extends Fragment{
 
     private class GoneLayout implements IGoneL {
 
-        private Word editingWord;                  //текущее слово, которое редактируем
-        private int positionInList;
+        private Word editingWord;                   //текущее слово, которое редактируем
+        private int positionInList;                 //позиция слова в листе
         private final ConstraintLayout editLayout;  //Лайоут, на котором васе редактирвоание происходит
-        private final TxtToSpeech toSpeech;           //Класс, отвечабщий за произношение слова, нужен для озвучивания англ слова
+        private final TxtToSpeech toSpeech;         //Класс, отвечабщий за произношение слова, нужен для озвучивания англ слова
 
         public GoneLayout(ConstraintLayout goneLayout){
             View view = getView();
@@ -308,7 +309,10 @@ public class Fragment_Home extends Fragment{
             del.setOnClickListener(v -> {
                 bdWords.delete(editingWord.getId());
                 myAdapter.delete(editingWord);
+
                 myAdapter.notifyItemRemoved(positionInList);
+                myAdapter.notifyItemRangeChanged(positionInList, myAdapter.getSizeArray());
+
                 //updateList(0,myAdapter.getSizeArray());
                 visible(false);
 

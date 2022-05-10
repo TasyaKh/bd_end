@@ -1,4 +1,4 @@
-package com.example.bd.Fragments;
+package com.example.bd.Logic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,18 +10,19 @@ import com.example.bd.Logic.SortWord;
 import java.util.HashSet;
 
 public class FHome_SaveSettings {
-    private final Context context;
-    private final SharedPreferences settingsSort;
+    private final Context context;                  //контекст
+    private final SharedPreferences settingsSort;   //нужен, чтобы сохранить настройки
 
-    private final String LANGUAGE_WORD ="LanguageWord";
-    private final String SORT_WORD = "SortWord";
-    private final String SAVE_SETTINGS = "SaveSettings";
+    private final String LANGUAGE_WORD ="LanguageWord";  //язык
+    private final String SORT_WORD = "SortWord";         //тип сортировки
+    private final String SAVE_SETTINGS = "SaveSettings"; //дать название
 
     public FHome_SaveSettings(Context context){
         this.context = context;
         settingsSort = context.getSharedPreferences(SAVE_SETTINGS, Context.MODE_PRIVATE);
     }
 
+    //сохранить тип языка
     public void saveLanguageWord(LanguageWord languageWord){
 
         SharedPreferences.Editor editor = settingsSort.edit();
@@ -30,6 +31,7 @@ public class FHome_SaveSettings {
         editor.apply();
     }
 
+    //сохранить тип сортировки
     public void saveSortWord(SortWord sortWord){
 
         SharedPreferences.Editor editor = settingsSort.edit();
@@ -38,6 +40,7 @@ public class FHome_SaveSettings {
         editor.apply();
     }
 
+    //выгрузить язык
     public LanguageWord loadSettingsLanguageWord(){
 
         LanguageWord languageWord = LanguageWord.ENGLISH;
@@ -57,6 +60,7 @@ public class FHome_SaveSettings {
         return languageWord;
     }
 
+    //выгрузить тип сортировки
     public SortWord loadSettingsSortWord(){
 
         SortWord sortWord = SortWord.DEFAULT;

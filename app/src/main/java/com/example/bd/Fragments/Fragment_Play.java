@@ -1,8 +1,6 @@
 package com.example.bd.Fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,9 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.bd.Logic.BDWords;
 import com.example.bd.Logic.LanguageWord;
@@ -36,7 +32,7 @@ import java.util.Objects;
 public class Fragment_Play extends Fragment {
 
 
-    private Play_AlertDialog fragmentAlertDialog;  //Отобразить статистику
+    private Play_AlertDialog fragmentAlertDialog;      //Отобразить статистику
 
     private FragmentPlayBinding binding;               //Связыватель
 
@@ -94,7 +90,6 @@ public class Fragment_Play extends Fragment {
 
 
             fragmentAlertDialog.show();
-
         });
 
         Button check = view.findViewById(R.id.check);

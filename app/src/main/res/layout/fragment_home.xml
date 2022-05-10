@@ -177,7 +177,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:scrollbars="vertical"
         android:layout_margin="5dp"
         >
 

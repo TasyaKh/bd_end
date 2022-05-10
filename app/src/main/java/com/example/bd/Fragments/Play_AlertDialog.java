@@ -36,8 +36,8 @@ public class Play_AlertDialog extends AppCompatDialog {
 
     private DialogListAdapter myAdapter;                //адаптер для листа для просмотра списка слов
 
-    private static String CORRECT_TITLE;
-    private static String IN_GAME_TITLE;
+    private static String CORRECT_TITLE;                //название сверху для правильных слов
+    private static String IN_GAME_TITLE;                //название сверху для слов в игре
 
     public Play_AlertDialog(Context context){
         super(context);
@@ -120,6 +120,7 @@ public class Play_AlertDialog extends AppCompatDialog {
         deletedWords = null;
     }
 
+    //когда надо показать статистику игры
     @Override
     public void show() {
         super.show();
@@ -133,7 +134,7 @@ public class Play_AlertDialog extends AppCompatDialog {
 
         //Допустимое число некорректных слов
         private final LayoutInflater mLayoutInflater;           //привязывает все лайоуты (прямоугольники со словами к фрагменту)
-        private ArrayList<WordStatistic> arrayMyWords;    //Массив со словами статистики
+        private ArrayList<WordStatistic> arrayMyWords;          //Массив со словами статистики
 
         public DialogListAdapter(Context ctx, ArrayList<WordStatistic> arr) {
 
